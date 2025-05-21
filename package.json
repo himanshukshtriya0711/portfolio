@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://himanshusingh.github.io/portfolio",
   "dependencies": {
+    "@craco/craco": "^7.1.0",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.6",
@@ -24,9 +25,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
@@ -51,7 +52,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.17",
-    "gh-pages": "^6.3.0",
+    "gh-pages": "^6.1.1",
     "postcss": "^8.4.33",
     "tailwindcss": "^3.4.1"
   }

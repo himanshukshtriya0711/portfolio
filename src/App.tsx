@@ -10,7 +10,7 @@ import './App.css';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/portfolio">
       <div className="App bg-[#0a0a0f] text-white min-h-screen">
         <Navbar />
         <Routes>

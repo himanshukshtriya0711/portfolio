@@ -8,6 +8,14 @@ module.exports = {
       colors: {
         primary: '#0a0a0f',
         secondary: '#1a1a1f',
+        purple: {
+          400: '#a78bfa',
+          500: '#8b5cf6',
+        },
+        pink: {
+          400: '#f472b6',
+          500: '#ec4899',
+        },
       },
       animation: {
         blob: "blob 7s infinite",

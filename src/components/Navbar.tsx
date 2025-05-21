@@ -1,13 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemText, useMediaQuery, useTheme } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const menuItems = ['Home', 'About', 'Skills', 'Projects', 'Contact'];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -23,9 +39,18 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar position="fixed" sx={{ background: 'rgba(10, 10, 15, 0.95)', backdropFilter: 'blur(10px)' }}>
-        <Toolbar sx={{ justifyContent: 'space-between' }}>
-          <div className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+      <AppBar 
+        position="fixed" 
+        
+        sx={{ 
+          background: scrolled ? 'rgba(10, 10, 15, 0.95)' : 'transparent', 
+          backdropFilter: scrolled ? 'blur(10px)' : 'none',
+          boxShadow: scrolled ? '0 4px 6px -1px rgba(0, 0, 0, 0.1)' : 'none',
+          transition: 'all 0.3s ease'
+        }}
+      >
+        <Toolbar sx={{ justifyContent: 'space-between', height: '70px' }}>
+          <div className="text-2xl font-bold gradient-text">
             Himanshu Singh
           </div>
           {isMobile ? (
@@ -34,11 +59,12 @@ const Navbar = () => {
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
+              sx={{ color: 'white' }}
             >
               <MenuIcon />
             </IconButton>
           ) : (
-            <div className="hidden md:flex gap-8">
+            <div className="flex gap-8">
               {menuItems.map((item) => (
                 <button
                   key={item}
@@ -73,6 +99,7 @@ const Navbar = () => {
               key={item}
               onClick={() => scrollToSection(item)}
               sx={{
+                
                 '&:hover': {
                   background: 'rgba(147, 51, 234, 0.1)'
                 }
